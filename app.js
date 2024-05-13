@@ -8,10 +8,6 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var connectDB = require('./database');
 
-// registering routes
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 // connect to mongodb
 mongoose.Promise = global.Promise;
 connectDB();
@@ -28,7 +24,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+// registering routes
+var usersRouter = require('./routes/users');
+
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
