@@ -13,6 +13,9 @@ var UserSchema = new Schema({
     username: {
         type: String,
         required: true,
+        index: {
+            unique: true
+        }
     },
     name: {
         type: String,
@@ -21,7 +24,7 @@ var UserSchema = new Schema({
     password: {
         type: String,
         required: true,
-    }
+    },
 });
 
 const user = mongoose.model('Users', UserSchema);
