@@ -1,13 +1,8 @@
 const express = require("express");
-const accountController = require("../controllers/account/accountController");
+const accountController = require("../controllers/accountController");
 const accountsRouter = express.Router();
 
-accountsRouter.get("/", findByName);
-accountsRouter.post("/", create);
-accountsRouter.put("/", editByName);
-accountsRouter.delete("/", deleteByName);
-
-const create = async(req, res) => {
+async function create (req, res) {
     const accountName = req.body.accountName;
     if (!(accountName)) {
         res.status(400).send('All the inputs are required');
@@ -19,25 +14,30 @@ const create = async(req, res) => {
     res.status(200).send(`Account ${accountName} created successfully!`);
 };
 
-const findByName = async(req, res) => {
+async function findByName(req, res) {
     const accountName = req.body.accountName;
     if (!(accountName)) {
         res.status(400).send('All the inputs are required');
     }
 };
 
-const editByName = async(req, res) => {
+async function editByName (req, res) {
     const accountName = req.body.accountName;
     if (!(accountName)) {
         res.status(400).send('All the inputs are required');
     }
 };
 
-const deleteByName = async(req, res) => {
+async function deleteByName (req, res) {
     const accountName = req.body.accountName;
     if (!(accountName)) {
         res.status(400).send('All the inputs are required');
     }
 };
+
+accountsRouter.post("/", create);
+accountsRouter.get("/", findByName);
+accountsRouter.put("/", editByName);
+accountsRouter.delete("/", deleteByName);
 
 module.exports = accountsRouter;

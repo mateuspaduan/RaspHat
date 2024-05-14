@@ -41,7 +41,17 @@ const editByName = async(currentAccountName, newAccountName) => {
     return accountToEdit;
 };
 
+const deleteByName = async (accountName) => {
+    const accountToDelete = await findByName(accountName);
+    if (!(accountToDelete)) {
+        return false;
+    } else {
+        await accountToDelete.deleteOne();
+    }
+};
+
 module.exports = create, 
-                 checkIfExistsByName, 
+                 checkIfExistsByName,
                  findByName,
-                 editByName;
+                 editByName,
+                 deleteByName;
