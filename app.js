@@ -25,10 +25,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // registering routes
-// var usersRouter = require('./routes/user');
+var usersRouter = require('./routes/user');
 var accountsRouter = require('./routes/account');
 
-//app.use('/users', usersRouter);
+app.use('/users', usersRouter);
 app.use('/accounts', accountsRouter);
 
 // catch 404 and forward to error handler
