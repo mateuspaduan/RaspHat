@@ -26,8 +26,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // registering routes
 var usersRouter = require('./routes/users');
+var accountsRouter = require('./routes/accounts');
 
 app.use('/users', usersRouter);
+app.use('/accounts', accountsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

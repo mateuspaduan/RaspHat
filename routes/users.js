@@ -1,15 +1,15 @@
 const express = require("express");
-const createUser = require("../controllers/authentication/createUser");
-const loginUser = require("../controllers/authentication/loginUser");
-const authUser = require("../controllers/authentication/authorizationUser");
-const logoutUser = require("../controllers/authentication/logoutUser");
-const testUser = require("../controllers/authentication/testUser");
-const router = express.Router();
+const createUser = require("../controllers/user/authentication/createUser");
+const loginUser = require("../controllers/user/authentication/loginUser");
+const authUser = require("../controllers/user/authentication/authorizationUser");
+const logoutUser = require("../controllers/user/authentication/logoutUser");
+const testUser = require("../controllers/user/authentication/testUser");
+const usersRouter = express.Router();
 
-router.post("/signup", createUser);
-router.post("/login", loginUser);
-router.get("/testUser", testUser);
-router.get("/protected", authUser);
-router.get("/logout", logoutUser);
+usersRouter.post("/signup", createUser);
+usersRouter.post("/login", loginUser);
+usersRouter.get("/testUser", testUser);
+usersRouter.get("/protected", authUser);
+usersRouter.get("/logout", logoutUser);
 
-module.exports = router;
+module.exports = usersRouter;

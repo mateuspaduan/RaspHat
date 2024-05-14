@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
-const User = require('../../models/user.js')
-const createSecretToken = require('../../jwtGeneration.js');
+const User = require('../../../models/user.js');
+const createSecretToken = require('../../../jwtGeneration.js');
 const env = require('dotenv');
 
 env.config();
