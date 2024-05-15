@@ -2,7 +2,7 @@ const User = require('../models/user.js');
 const Account = require('../models/account.js');
 const bcrypt = require('bcrypt');
 const accountController = require('../controllers/accountController.js');
-const createSecretToken = require('../jwtGeneration.js');
+//const createSecretToken = require('../jwtGeneration.js');
 
 const findByEmail = async(email) => {
     const existingUser = await User.findOne({email: email});
@@ -53,27 +53,27 @@ const create = async(name, email, username, password) => {
 
 // Should all the edits receive the token as parameter or
 // Should I call authenticationController.js?
-const editPasswordByEmail = async(email, newPassword) => {
-    const userToEdit = await findByEmail(email);
-    if (!(userToEdit)) {
-        return false;
-    } else {
-        userToEdit.password = newPassword;
-        await userToEdit.save();
-    }
-    return userToEdit;
-};
+// const editPasswordByEmail = async(email, newPassword) => {
+//    const userToEdit = await findByEmail(email);
+//    if (!(userToEdit)) {
+//        return false;
+//    } else {
+//        userToEdit.password = newPassword;
+//        await userToEdit.save();
+//    }
+//    return userToEdit;
+//};
 
-const editUsernameByEmail = async (email, newUsername) => {
-    const userToEdit = await findByEmail(email);
-    if (!(userToEdit)) {
-        return false;
-    } else {
-        userToEdit.username = newUsername;
-        await userToEdit.save();
-    }
-    return userToEdit;
-};
+// const editUsernameByEmail = async (email, newUsername) => {
+//     const userToEdit = await findByEmail(email);
+//     if (!(userToEdit)) {
+//         return false;
+//     } else {
+//         userToEdit.username = newUsername;
+//         await userToEdit.save();
+//     }
+//     return userToEdit;
+// };
 
 const deleteByEmail = async (email) => {
     const userToDelete = await findByEmail(email);

@@ -7,7 +7,7 @@ async function create (req, res) {
     if (!(accountName)) {
         res.status(400).send('All the inputs are required');
     }
-    const newAccount = await accountController.createAccount(accountName);
+    const newAccount = await accountController.create(accountName);
     if (!(newAccount)) {
         res.status(400).send('An account with that name already exists.');
     }
