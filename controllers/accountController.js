@@ -9,7 +9,7 @@ const findByName = async(accountName) => {
 };
 
 const checkIfExistsByName = async(accountName) => {
-    const existingAccount = await findAccountByName(accountName);
+    const existingAccount = await findByName(accountName);
     if (existingAccount) {
         return true;
     }
@@ -17,7 +17,7 @@ const checkIfExistsByName = async(accountName) => {
 };
 
 const create = async(accountName) => {
-    const accountExists = await checkAccountExistsByName(accountName);
+    const accountExists = await checkIfExistsByName(accountName);
     if (accountExists) {
         return false;
     } else {
