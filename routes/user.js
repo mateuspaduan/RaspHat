@@ -30,8 +30,8 @@ async function deleteByUsername (req, res) {
 };
 
 userRouter.post("/", create);
-userRouter.get("/", findByUsername);
-userRouter.put("/", editByUsername);
+userRouter.get("/", findByEmail);
+userRouter.put("/", editByEmail);
 userRouter.delete("/", deleteByUsername);
 
 module.exports = userRouter;

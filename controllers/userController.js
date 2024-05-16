@@ -27,7 +27,7 @@ const create = async(name, email, username, password) => {
     } else {
         const account = await accountController.findByName('IBM');
         if (account) {
-            const user;
+            const user = null;
             // const token;
             const rounds = 10;
             const hashedPassword = bcrypt.hash(password, rounds);
@@ -88,6 +88,6 @@ const deleteByEmail = async (email) => {
 module.exports = create, 
                  checkIfExistsByEmail,
                  findByEmail,
-                 editPasswordByEmail,
-                 editUsernameByEmail,
+                 //editPasswordByEmail,
+                 //editUsernameByEmail,
                  deleteByEmail;
