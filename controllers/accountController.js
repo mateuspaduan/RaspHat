@@ -50,8 +50,10 @@ const deleteByName = async (accountName) => {
     }
 };
 
-module.exports = create, 
-                 checkIfExistsByName,
-                 findByName,
-                 editByName,
-                 deleteByName;
+module.exports = {
+                    create, 
+                    checkIfExistsByName,
+                    findByName,
+                    editByName,
+                    deleteByName
+                };

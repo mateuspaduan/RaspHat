@@ -85,9 +85,11 @@ const deleteByEmail = async (email) => {
     return userToDelete;
 };
 
-module.exports = create, 
-                 checkIfExistsByEmail,
-                 findByEmail,
-                 //editPasswordByEmail,
-                 //editUsernameByEmail,
-                 deleteByEmail;
+module.exports = { 
+                    create, 
+                    checkIfExistsByEmail,
+                    findByEmail,
+                    //editPasswordByEmail,
+                    //editUsernameByEmail,
+                    deleteByEmail
+                };
