@@ -51,18 +51,16 @@ const create = async(name, email, username, password) => {
     return false;
 };
 
-// Should all the edits receive the token as parameter or
-// Should I call authenticationController.js?
-// const editPasswordByEmail = async(email, newPassword) => {
-//    const userToEdit = await findByEmail(email);
-//    if (!(userToEdit)) {
-//        return false;
-//    } else {
-//        userToEdit.password = newPassword;
-//        await userToEdit.save();
-//    }
-//    return userToEdit;
-//};
+const editPasswordByEmail = async(email, newPassword) => {
+   const userToEdit = await findByEmail(email);
+   if (!(userToEdit)) {
+       return false;
+   } else {
+       userToEdit.password = newPassword;
+       await userToEdit.save();
+   }
+   return userToEdit;
+};
 
 // const editUsernameByEmail = async (email, newUsername) => {
 //     const userToEdit = await findByEmail(email);
@@ -89,7 +87,7 @@ module.exports = {
                     create, 
                     checkIfExistsByEmail,
                     findByEmail,
-                    //editPasswordByEmail,
+                    editPasswordByEmail,
                     //editUsernameByEmail,
                     deleteByEmail
                 };

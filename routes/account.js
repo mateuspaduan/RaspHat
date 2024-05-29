@@ -11,7 +11,7 @@ async function create (req, res) {
     if (!(newAccount)) {
         res.sendStatus(400).send('An account with that name already exists.');
     }
-    res.sendStatus(200).send(`Account ${accountName} created successfully!`);
+    res.sendStatus(200).json({message: `Account ${accountName} created successfully!`});
 };
 
 async function findByName(req, res) {

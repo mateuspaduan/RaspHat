@@ -30,7 +30,7 @@ const create = async(accountName) => {
     return true;
 };
 
-const editByName = async(currentAccountName, newAccountName) => {
+const editPasswordByEmail = async(currentAccountName, newAccountName) => {
     const accountToEdit = await findByName(currentAccountName);
     if (!(accountToEdit)) {
         return false;
@@ -54,6 +54,6 @@ module.exports = {
                     create, 
                     checkIfExistsByName,
                     findByName,
-                    editByName,
+                    editPasswordByEmail,
                     deleteByName
                 };
