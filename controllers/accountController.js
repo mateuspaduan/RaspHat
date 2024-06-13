@@ -1,11 +1,16 @@
 const Account = require('../models/account.js');
 
-const findByName = async(accountName) => {
-    const existingAccount = await Account.findOne({accountName: accountName});
-    if (existingAccount) {
-        return existingAccount;
+const findByName = async (accountName) => {
+    try {
+        const existingAccount = await Account.findOne({ accountName: accountName });
+        if (existingAccount) {
+            return existingAccount;
+        }
+        return false;
+    } catch (error) {
+        console.error('Error finding account:', error);
+        return false;
     }
-    return false;
 };
 
 const checkIfExistsByName = async(accountName) => {
@@ -30,7 +35,7 @@ const create = async(accountName) => {
     return true;
 };
 
-const editPasswordByEmail = async(currentAccountName, newAccountName) => {
+const editByName = async(currentAccountName, newAccountName) => {
     const accountToEdit = await findByName(currentAccountName);
     if (!(accountToEdit)) {
         return false;
@@ -43,10 +48,11 @@ const editPasswordByEmail = async(currentAccountName, newAccountName) => {
 
 const deleteByName = async (accountName) => {
     const accountToDelete = await findByName(accountName);
-    if (!(accountToDelete)) {
-        return false;
+    if (accountToDelete) {
+        await Account.deleteOne({_id: accountToDelete._id});
+        return true;
     } else {
-        await accountToDelete.deleteOne();
+        return accountToDelete;
     }
 };
 
@@ -54,6 +60,6 @@ module.exports = {
                     create, 
                     checkIfExistsByName,
                     findByName,
-                    editPasswordByEmail,
+                    editByName,
                     deleteByName
                 };
