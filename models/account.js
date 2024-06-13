@@ -8,7 +8,9 @@ var AccountSchema = new Schema({
   },
   users: [{
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    type: Schema.Types.String,
+    ref: 'Email',
   }]
 });
 

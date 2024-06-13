@@ -1,8 +1,6 @@
 const User = require('../models/user.js');
-const Account = require('../models/account.js');
 const bcrypt = require('bcrypt');
 const accountController = require('../controllers/accountController.js');
-//const createSecretToken = require('../jwtGeneration.js');
 
 const findByEmail = async(email) => {
     const existingUser = await User.findOne({email: email});
@@ -27,10 +25,8 @@ const create = async(name, email, username, password) => {
     } else {
         const account = await accountController.findByName('IBM');
         if (account) {
-            const user = null;
-            // const token;
             const rounds = 10;
-            const hashedPassword = bcrypt.hash(password, rounds);
+            const hashedPassword = await generateHashedPassword(password, rounds);
             const newUser = new User({
                 name: name,
                 email: email,
@@ -38,40 +34,29 @@ const create = async(name, email, username, password) => {
                 password: hashedPassword,
                 accounts: [account._id],
             });
-            user = await newUser.save();
-            account.push(user);
-            await user.populate('accounts');
+            await newUser.save();
+            account.users.push(newUser._id, newUser.email);
             await account.save();
-            // Do I need to set a token during user creation?
-            // token = createSecretToken(user._id); 
-            // return token;
+            await newUser.populate('accounts');
             return true;
         }
+        else {
+            return false;
+        }
     }
-    return false;
 };
 
 const editPasswordByEmail = async(email, newPassword) => {
-   const userToEdit = await findByEmail(email);
-   if (!(userToEdit)) {
-       return false;
-   } else {
-       userToEdit.password = newPassword;
-       await userToEdit.save();
-   }
-   return userToEdit;
+    const rounds = 10;
+    const userToEdit = await findByEmail(email);
+    if (!(userToEdit)) {
+        return false;
+    } else {
+        userToEdit.password = await generateHashedPassword(newPassword, rounds);
+        await userToEdit.save();
+        return userToEdit;
+    }
 };
-
-// const editUsernameByEmail = async (email, newUsername) => {
-//     const userToEdit = await findByEmail(email);
-//     if (!(userToEdit)) {
-//         return false;
-//     } else {
-//         userToEdit.username = newUsername;
-//         await userToEdit.save();
-//     }
-//     return userToEdit;
-// };
 
 const deleteByEmail = async (email) => {
     const userToDelete = await findByEmail(email);
@@ -83,11 +68,16 @@ const deleteByEmail = async (email) => {
     return userToDelete;
 };
 
+const generateHashedPassword = async (password, rounds) => {
+    const hashedPassword = await bcrypt.hash(password, rounds);
+    return hashedPassword;
+};
+
 module.exports = { 
                     create, 
                     checkIfExistsByEmail,
                     findByEmail,
                     editPasswordByEmail,
-                    //editUsernameByEmail,
+                    generateHashedPassword,
                     deleteByEmail
                 };
